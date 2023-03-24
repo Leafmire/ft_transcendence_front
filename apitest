@@ -1,0 +1,167 @@
+Authentication
+POST /auth/login
+사용자 로그인 기능
+Request:
+email (string): 사용자 이메일
+password (string): 사용자 비밀번호
+Response:
+status (string): 성공 또는 실패
+token (string): 인증 토큰 (성공 시)
+User
+GET /users/me
+
+인증된 사용자의 프로필 정보 조회
+Response:
+nickname (string): 닉네임
+avatar_url (string): 아바타 이미지 URL
+PUT /users/me
+
+인증된 사용자의 프로필 정보 수정
+Request:
+nickname (string): 변경할 닉네임 (선택 사항)
+avatar_url (string): 변경할 아바타 이미지 URL (선택 사항)
+Response:
+status (string): 성공 또는 실패
+Chat
+GET /chatrooms
+
+채팅방 목록 조회
+Response:
+chatrooms (array): 채팅방 목록
+id (integer): 채팅방 ID
+name (string): 채팅방 이름
+POST /chatrooms
+
+채팅방 생성
+Request:
+name (string): 채팅방 이름
+Response:
+status (string): 성공 또는 실패
+chatroom_id (integer): 생성된 채팅방 ID (성공 시)
+Game
+GET /game/rooms
+
+1대1 게임방 목록 조회
+Response:
+rooms (array): 게임방 목록
+id (integer): 게임방 ID
+player1 (string): 플레이어 1 닉네임
+player2 (string): 플레이어 2 닉네임 (없으면 null)
+POST /game/rooms
+
+1대1 게임방 생성
+Request:
+opponent_nickname (string): 상대 플레이어의 닉네임
+Response:
+status (string): 성공 또는 실패
+room_id (integer): 생성된 게임방 ID (성공 시)
+
+
+Friends
+GET /friends
+
+인증된 사용자의 친구 목록 조회
+Response:
+friends (array): 친구 목록
+id (integer): 친구 ID
+nickname (string): 친구 닉네임
+avatar_url (string): 친구 아바타 이미지 URL
+POST /friends
+
+친구 추가
+Request:
+friend_nickname (string): 추가할 친구의 닉네임
+Response:
+status (string): 성공 또는 실패
+DELETE /friends/{friend_id}
+
+친구 삭제
+Path parameter:
+friend_id (integer): 삭제할 친구의 ID
+Response:
+status (string): 성공 또는 실패
+1-on-1 Chat
+POST /chatrooms/1on1
+친구를 1대1 채팅방에 초대
+Request:
+friend_id (integer): 초대할 친구의 ID
+Response:
+status (string): 성공 또는 실패
+chatroom_id (integer): 생성된 1대1 채팅방 ID (성공 시)
+1-on-1 Game
+POST /game/rooms/invite
+친구를 1대1 게임방에 초대
+Request:
+friend_id (integer): 초대할 친구의 ID
+Response:
+status (string): 성공 또는 실패
+room_id (integer): 생성된 게임방 ID (성공 시)
+
+User
+GET /users/{user_id}
+
+다른 사용자의 정보 조회
+Path parameter:
+user_id (integer): 조회할 사용자의 ID
+Response:
+nickname (string): 닉네임
+avatar_url (string): 아바타 이미지 URL
+POST /users/block
+
+다른 사용자 차단
+Request:
+user_id (integer): 차단할 사용자의 ID
+Response:
+status (string): 성공 또는 실패
+DELETE /users/block/{user_id}
+
+차단한 사용자 차단 해제
+Path parameter:
+user_id (integer): 차단 해제할 사용자의 ID
+Response:
+status (string): 성공 또는 실패
+Chat
+POST /chatrooms/secret
+
+비밀 채팅방 생성
+Request:
+name (string): 채팅방 이름
+password (string): 채팅방 비밀번호
+Response:
+status (string): 성공 또는 실패
+chatroom_id (integer): 생성된 비밀 채팅방 ID (성공 시)
+POST /chatrooms/public
+
+공개 채팅방 생성
+Request:
+name (string): 채팅방 이름
+Response:
+status (string): 성공 또는 실패
+chatroom_id (integer): 생성된 공개 채팅방 ID (성공 시)
+PUT /chatrooms/{chatroom_id}/permissions
+
+채팅방 권한 변경
+Path parameter:
+chatroom_id (integer): 권한을 변경할 채팅방의 ID
+Request:
+user_id (integer): 권한을 변경할 사용자의 ID
+role (string): 변경할 권한 ('owner', 'admin', 'normal')
+Response:
+status (string): 성공 또는 실패
+POST /chatrooms/{chatroom_id}/ban
+
+채팅방에서 사용자 밴
+Path parameter:
+chatroom_id (integer): 사용자를 밴할 채팅방의 ID
+Request:
+user_id (integer): 밴할 사용자의 ID
+Response:
+status (string): 성공 또는 실패
+DELETE /chatrooms/{chatroom_id}/ban/{user_id}
+
+채팅방에서 밴 해제
+Path parameters:
+chatroom_id (integer): 사용자의 밴을 해제할 채팅방의 ID
+user_id (integer): 밴 해제할 사용자의 ID
+Response:
+status (string): 성공 또는 실패

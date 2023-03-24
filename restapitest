@@ -1,0 +1,58 @@
+Authentication
+POST /api/auth/login
+사용자 로그인 기능
+Users
+GET /api/users/me
+
+인증된 사용자의 프로필 정보 조회
+PUT /api/users/me
+
+인증된 사용자의 프로필 정보 수정
+GET /api/users/{user_id}
+
+다른 사용자의 정보 조회
+POST /api/users/me/blocks
+
+다른 사용자 차단
+DELETE /api/users/me/blocks/{user_id}
+
+차단한 사용자 차단 해제
+Friends
+GET /api/users/me/friends
+
+인증된 사용자의 친구 목록 조회
+POST /api/users/me/friends
+
+친구 추가
+DELETE /api/users/me/friends/{friend_id}
+
+친구 삭제
+Chat Rooms
+GET /api/chatrooms
+
+채팅방 목록 조회
+POST /api/chatrooms
+
+채팅방 생성 (공개 및 비밀 채팅방)
+POST /api/chatrooms/{chatroom_id}/members
+
+1대1 채팅방에 친구 초대
+PUT /api/chatrooms/{chatroom_id}/members/{user_id}/role
+
+채팅방 권한 변경
+POST /api/chatrooms/{chatroom_id}/bans
+
+채팅방에서 사용자 밴
+DELETE /api/chatrooms/{chatroom_id}/bans/{user_id}
+
+채팅방에서 밴 해제
+Game Rooms
+GET /api/gamerooms
+
+1대1 게임방 목록 조회
+POST /api/gamerooms
+
+1대1 게임방 생성
+POST /api/gamerooms/{gameroom_id}/members
+
+친구를 1대1 게임방에 초대
